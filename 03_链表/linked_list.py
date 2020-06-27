@@ -30,6 +30,27 @@ class LinkedList(object):
     def __len__(self):
         return self.length
 
+    def insert(self, pos, value):
+        if self.maxsize is not None and len(self) >= self.maxsize:
+            raise Exception('Linkedlist is Full')
+        node = Node(value)
+        tailnode = self.tailnode
+        if pos == 0:
+            node.next = self.head
+            self.head = node
+        elif pos == self.maxsize:
+            tailnode.next = node
+            self.tailnode = node
+        else:
+            count = 1
+            prenode = self.root.next
+            while count < pos:
+                count += 1
+                prenode = prenode.next
+                #当循环退出后，prenode指向pos-1位置
+        node.next = prenode.next
+        prenode.next = node
+
     def append(self, value):    # O(1)
         if self.maxsize is not None and len(self) >= self.maxsize:
             raise Exception('LinkedList is Full')
